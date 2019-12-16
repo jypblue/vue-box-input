@@ -1,7 +1,7 @@
 {
   "name": "vue-box-input",
   "description": "A Vue.js component of chat input box",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/vue-box-input",
   "author": "wangzhaoxiong <zx.wang1991@gmail.com>",
   "license": "MIT",

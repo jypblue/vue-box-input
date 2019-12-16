@@ -37,6 +37,7 @@ $ yarn add vue-box-input
 | input | input事件| Function(val) | -   | false |
 | image-paste  | 剪贴板图片粘贴事件|Function(file) |  - | false |
 | message-send | 消息发送事件  |Function(text) | -  | true |
+| clearMessage | 清空输入框中的信息 | Function| - | false |
 ## How To Use
 
 ```
@@ -47,7 +48,8 @@ Vue.use(VueBoxInput)
 
 Component Use:
  	<vue-box-input
- 		:emoji="emojiValue"
+ 		  :emoji="emojiValue"
+      ref="chatBox"
 	    @input="handleWordsInput"
 	    @image-paste="handleImageFileGet"
 	    @message-send="handleMessageSend"
@@ -55,10 +57,13 @@ Component Use:
 
     </vue-box-input>
 
+    this.$refs.chatBox.clearMessage();
+
 ```
 
 ## Update Log
 
+- version 1.1.0 => add clearMessage function
 - version 1.0.0 => add basic function of a chat input box
 
 

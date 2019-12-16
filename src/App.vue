@@ -1,18 +1,21 @@
 <template>
   <div id="app">
     <vue-box-input
-    @input="handleWordsInput"
-    @image-paste="handleImageFileGet"
-    @message-send="handleMessageSend"
+        ref="chatBox"
+      @image-paste="handleImageFileGet"
+      @message-send="handleMessageSend"
     >
-
     </vue-box-input>
   </div>
 </template>
 
 <script>
+import VueBoxInput from './lib/vue-box-input.vue'
 export default {
   name: 'app',
+  components:{
+    VueBoxInput
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -27,6 +30,8 @@ export default {
     },
     handleMessageSend(val) {
       console.log('message:',val);
+      console.log(this.$refs.chatBox)
+      this.$refs.chatBox.clearMessage();
     }
   }
 }

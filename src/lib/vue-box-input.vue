@@ -16,14 +16,14 @@ import * as utils from './utils.js';
 export default {
   name: 'vue-box-input',
   props:{
-    inputDelayTime: {
+    delayTime: {
       type: Number,
       default: 100
     },
     emoji:{
       type: String,
       default: ''
-    }
+    },
   },
   data() {
     return {
@@ -32,8 +32,8 @@ export default {
   },
   watch:{
     emoji(val){
-      this.fnInsertText(val);
-    }
+      this.insertText(val);
+    },
   },
   methods:{
     handleKeydown(event) {
@@ -77,12 +77,12 @@ export default {
     },
     handleBlur() {
       // 获取当前光标位置
-      this.fnGetCursorPos();
+      this.getCursorPos();
     },
-    fnGetCursorPos(){
+    getCursorPos(){
       this.lastEditRange = window.getSelection().getRangeAt(0);
     },
-    fnSetBoxInputCursorPos(value){
+    setBoxInputCursorPos(value){
       const inputBox = this.$refs.inputbox;
       const emojiValue = value;
       // 聚焦
@@ -144,24 +144,27 @@ export default {
       // 无论如何都要记录最后光标对象
       this.lastEditRange = selection.getRangeAt(0);
     },
-    fnInsertText(val){
-      this.fnSetBoxInputCursorPos(val);
+    insertText(val){
+      this.setBoxInputCursorPos(val);
     },
     // 回调输入信息
     handleInput() {
       const inputContent = this.$refs.inputbox.innerHTML;
       this.$emit('input', inputContent);
     },
+    clearMessage() {
+      this.$refs.inputbox.innerHTML = '';
+    },
     handleSend() {
       this.$emit('message-send', this.$refs.inputbox.innerHTML);
     },
-    fnSetScrollToEnd(){
+    handleScrollToEnd(){
       const inputBox = this.$refs.inputbox;
       window.setTimeout(()=>{
         inputBox.scrollTop = inputBox.scrollHeight;
       }, 0)
     },
-    fnFocusToEnd(){
+    handleFocusToEnd(){
       const inputBox = this.$refs.inputbox;
       if(window.getSelection) {
         inputBox.focus();
@@ -174,7 +177,7 @@ export default {
         range.collapse(false);
         range.select();
       }
-      this.fnSetScrollToEnd();
+      this.handleScrollToEnd();
     }
   }
 }
